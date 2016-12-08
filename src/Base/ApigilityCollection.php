@@ -20,8 +20,13 @@ abstract class ApigilityCollection extends Paginator
         $collection = new ZendArrayObject();
 
         foreach ($set as $item) {
-            $collection->append(new $this->itemType($item));
+            $collection->append($this->createItem($item));
         }
         return $collection;
+    }
+
+    protected function createItem($item)
+    {
+        return new $this->itemType($item);
     }
 }

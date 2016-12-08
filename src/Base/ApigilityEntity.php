@@ -19,11 +19,12 @@ abstract class ApigilityEntity
         $this->hydrator->hydrate($this->hydrator->extract($doctrine_entity), $this);
     }
 
-    protected function getJsonValueFromDoctrineCollection($collection, $item_type)
+    protected function getJsonValueFromDoctrineCollection($collection, $item_type, $serviceManager = null)
     {
         $data = array();
         foreach ($collection as $item) {
-            $data[] = $this->hydrator->extract(new $item_type($item));
+            if (empty($serviceManager)) $data[] = $this->hydrator->extract(new $item_type($item));
+            else $data[] = $this->hydrator->extract(new $item_type($item, $serviceManager));
         }
 
         return $data;
