@@ -31,6 +31,7 @@ abstract class ApigilityObjectStorageAwareEntity extends ApigilityEntity
 
     protected function renderUriToUrl($uri)
     {
-        return $this->objectStorageService->renderUriToUrl($uri);
+        if (empty($uri)) return $uri;
+        else return $this->objectStorageService->renderUriToUrl($uri);
     }
 }
